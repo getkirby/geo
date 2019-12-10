@@ -19,15 +19,13 @@ class Point
      * Latitude
      *
      * @var float
-     * @access protected
      */
     protected $lat;
 
     /**
-     * Latitude
+     * Longitude
      *
      * @var float
-     * @access protected
      */
     protected $lng;
 
@@ -45,6 +43,36 @@ class Point
 
         $this->lat = (float)$lat;
         $this->lng = (float)$lng;
+    }
+
+    /**
+     * Returns the latitude value of the point
+     *
+     * @return float
+     */
+    public function lat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Returns the longituted value of the point
+     *
+     * @return float
+     */
+    public function lng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Returns the longituted value of the point
+     *
+     * @return float
+     */
+    public function long()
+    {
+        return $this->lng();
     }
 
     /**
@@ -85,35 +113,5 @@ class Point
         }
 
         throw new Exception('Invalid Geo Point values');
-    }
-
-    /**
-     * Returns the latitude value of the point
-     *
-     * @return float
-     */
-    public function lat()
-    {
-        return $this->lat;
-    }
-
-    /**
-     * Returns the longituted value of the point
-     *
-     * @return float
-     */
-    public function lng()
-    {
-        return $this->lng;
-    }
-
-    /**
-     * Returns the longituted value of the point
-     *
-     * @return float
-     */
-    public function long()
-    {
-        return $this->lng();
     }
 }
