@@ -4,7 +4,7 @@ This plugin adds basic geo search and conversion functionalities to Kirby
 
 ## Geo Class Option
 
-### Geo::point
+### `Geo::point($lat, $lng)`
 
 Creates a new Kirby Geo Point
 
@@ -25,7 +25,7 @@ echo $point->lat();
 echo $point->lng();
 ```
 
-### Geo::distance
+### `Geo::distance($pointA, $pointB)`
 
 Returns the distance between two geo points.
 
@@ -42,7 +42,7 @@ You can also return the distance in miles instead of kilometers
 echo 'The distance between Mannheim and Hamburg is: ' . Geo::distance($mannheim, $hamburg, 'mi');
 ```
 
-### Geo::niceDistance
+### `Geo::niceDistance($pointA, $pointB)`
 
 Returns the distance between two geo points in a human readable way (i.e. 461.32 km)
 
@@ -59,7 +59,7 @@ You can also return the "nice distance" in miles instead of kilometers
 echo 'The distance between Mannheim and Hamburg is: ' . Geo::niceDistance($mannheim, $hamburg, 'mi');
 ```
 
-### Geo::kilometersToMiles
+### `Geo::kilometersToMiles($km)`
 
 Converts kilometers into miles:
 
@@ -67,7 +67,7 @@ Converts kilometers into miles:
 echo Geo::kilometersToMiles(1000);
 ```
 
-### Geo::milesToKilometers
+### `Geo::milesToKilometers($mi)`
 
 Converts miles into kilometers:
 
@@ -114,7 +114,7 @@ $addresses = page('addresses')->children()->filterBy('location', 'radius', [
 
 The plugin also adds a set of field methods, which can be handy to work with locations
 
-### coordinates
+### `$field->coordinates()`
 
 Converts a field with the value format {lat},{lng} into a valid Kirby Geo Point Object:
 
@@ -123,7 +123,7 @@ $page->location()->coordinates()->lat();
 $page->location()->coordinates()->lng();
 ```
 
-### distance
+### `$field->distance()`
 
 Calculates the distance between a location field and another Kirby Geo Point:
 
@@ -141,7 +141,7 @@ $hamburg = Geo::point(53.553436, 9.992247);
 echo $page->location()->distance($hamburg, 'mi');
 ```
 
-### niceDistance
+### `$field->niceDistance()`
 
 Returns the distance in a more human friendly format:
 
@@ -155,6 +155,6 @@ echo $page->location()->niceDistance($hamburg);
 
 <http://www.opensource.org/licenses/mit-license.php>
 
-## Author
+## Credits
 
-Bastian Allgeier <https://getkirby.com>
+[Bastian Allgeier](https://getkirby.com)

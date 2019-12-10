@@ -97,5 +97,4 @@ Kirby::plugin('getkirby/geo', [
             return Geo::niceDistance($field->coordinates(), $point, $unit);
         },
     ],
-
 ]);
