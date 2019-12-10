@@ -4,86 +4,75 @@ This plugin adds basic geo search and conversion functionalities to Kirby
 
 ## Geo Class Option
 
-### geo::point
+### Geo::point
 
 Creates a new Kirby Geo Point
 
-Example: 
+Example:
 
 ```php
-geo::point(49.4883333, 8.4647222);
-geo::point('49.4883333, 8.4647222');
-geo::point([49.4883333, 8.4647222]);
-geo::point(['lat' => 49.4883333, 'lng' => 8.4647222]);
+Geo::point(49.4883333, 8.4647222);
+Geo::point('49.4883333, 8.4647222');
+Geo::point([49.4883333, 8.4647222]);
+Geo::point(['lat' => 49.4883333, 'lng' => 8.4647222]);
 ```
 
-Afterwards you can get the latitude and longitude values of the point like this: 
+Afterwards you can get the latitude and longitude values of the point like this:
 
 ```php
-$point = geo::point(49.4883333, 8.4647222);
+$point = Geo::point(49.4883333, 8.4647222);
 echo $point->lat();
 echo $point->lng();
 ```
 
-### geo::distance
+### Geo::distance
 
 Returns the distance between two geo points.
 
 ```php
-$mannheim = geo::point(49.4883333, 8.4647222);
-$hamburg  = geo::point(53.553436, 9.992247);
+$mannheim = Geo::point(49.4883333, 8.4647222);
+$hamburg  = Geo::point(53.553436, 9.992247);
 
-echo 'The distance between Mannheim and Hamburg is: ' . geo::distance($mannheim, $hamburg);
+echo 'The distance between Mannheim and Hamburg is: ' . Geo::distance($mannheim, $hamburg);
 ```
 
 You can also return the distance in miles instead of kilometers
 
 ```php
-echo 'The distance between Mannheim and Hamburg is: ' . geo::distance($mannheim, $hamburg, 'mi');
+echo 'The distance between Mannheim and Hamburg is: ' . Geo::distance($mannheim, $hamburg, 'mi');
 ```
 
-### geo::niceDistance
+### Geo::niceDistance
 
 Returns the distance between two geo points in a human readable way (i.e. 461.32 km)
 
 ```php
-$mannheim = geo::point(49.4883333, 8.4647222);
-$hamburg  = geo::point(53.553436, 9.992247);
+$mannheim = Geo::point(49.4883333, 8.4647222);
+$hamburg  = Geo::point(53.553436, 9.992247);
 
-echo 'The distance between Mannheim and Hamburg is: ' . geo::niceDistance($mannheim, $hamburg);
+echo 'The distance between Mannheim and Hamburg is: ' . Geo::niceDistance($mannheim, $hamburg);
 ```
 
 You can also return the "nice distance" in miles instead of kilometers
 
 ```php
-echo 'The distance between Mannheim and Hamburg is: ' . geo::niceDistance($mannheim, $hamburg, 'mi');
+echo 'The distance between Mannheim and Hamburg is: ' . Geo::niceDistance($mannheim, $hamburg, 'mi');
 ```
 
-### geo::locate
+### Geo::kilometersToMiles
 
-Runs the Google geo locator to find the latitude and longitude for a certain address
+Converts kilometers into miles:
 
 ```php
-$mannheim = geo::locate('Mannheim, Germany'); 
-
-echo $mannheim->lat();
-echo $mannheim->lng();
+echo Geo::kilometersToMiles(1000);
 ```
 
-### geo::kilometersToMiles
+### Geo::milesToKilometers
 
-Converts kilometers into miles: 
-
-```php
-echo geo::kilometersToMiles(1000);
-```
-
-### geo::milesToKilometers
-
-Converts miles into kilometers: 
+Converts miles into kilometers:
 
 ```php
-echo geo::milesToKilometers(1000);
+echo Geo::milesToKilometers(1000);
 ```
 
 ## Radius Filter
@@ -98,13 +87,13 @@ $addresses = page('addresses')->children()->filterBy('location', 'radius', [
 ]);
 ```
 
-To make this work, the location field for each address page must be in the following format: 
+To make this work, the location field for each address page must be in the following format:
 
 ```
 location: {lat},{lng}
 ```
 
-or with a real life example: 
+or with a real life example:
 
 ```
 location: 49.4883333,8.4647222
@@ -139,7 +128,7 @@ $page->location()->coordinates()->lng();
 Calculates the distance between a location field and another Kirby Geo Point:
 
 ```php
-$hamburg = geo::point(53.553436, 9.992247);
+$hamburg = Geo::point(53.553436, 9.992247);
 
 echo $page->location()->distance($hamburg);
 ```
@@ -147,7 +136,7 @@ echo $page->location()->distance($hamburg);
 Of course you can run this in miles again:
 
 ```php
-$hamburg = geo::point(53.553436, 9.992247);
+$hamburg = Geo::point(53.553436, 9.992247);
 
 echo $page->location()->distance($hamburg, 'mi');
 ```
@@ -157,7 +146,7 @@ echo $page->location()->distance($hamburg, 'mi');
 Returns the distance in a more human friendly format:
 
 ```php
-$hamburg = geo::point(53.553436, 9.992247);
+$hamburg = Geo::point(53.553436, 9.992247);
 
 echo $page->location()->niceDistance($hamburg);
 ```
