@@ -2,6 +2,7 @@
     "name": "getkirby/geo",
     "description": "Kirby Geo",
     "keywords": ["kirby", "cms", "geo", "location", "plugin"],
+    "license": "MIT",
     "homepage": "https://getkirby.com",
     "type": "kirby-plugin",
     "authors": [
