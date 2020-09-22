@@ -4,8 +4,8 @@
  * Autoloader for all Kirby GEO Classes
  */
 load([
-    'kirby\\geo\\geo'   => __DIR__ . '/lib/geo.php',
-    'kirby\\geo\\point' => __DIR__ . '/lib/point.php'
+    'kirby\\geo\\geo'   => __DIR__ . '/lib/Geo.php',
+    'kirby\\geo\\point' => __DIR__ . '/lib/Point.php'
 ]);
 
 /**
