@@ -3,6 +3,7 @@
     "description": "Kirby Geo",
     "keywords": ["kirby", "cms", "geo", "location", "plugin"],
     "license": "MIT",
+    "version": "1.0.2",
     "homepage": "https://getkirby.com",
     "type": "kirby-plugin",
     "authors": [
@@ -12,8 +13,8 @@
         }
     ],
     "require": {
-        "php": ">=7.2.0",
-        "getkirby/composer-installer": "^1.1"
+        "php": ">=7.4.0",
+        "getkirby/composer-installer": "^1.2"
     },
     "require-dev": {
         "getkirby/cms": "^3.3"
