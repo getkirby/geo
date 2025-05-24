@@ -24,6 +24,15 @@ class GeoTest extends TestCase
 		$this->assertSame(288.4144863048072, $distance);
 	}
 
+	public function testDistanceSamePoint(): void
+	{
+		$a        = Geo::point(49.4883333, 8.4647222);
+		$b        = Geo::point(49.4883333, 8.4647222);
+		$distance = Geo::distance($a, $b);
+
+		$this->assertSame(0.0, $distance);
+	}
+
 	public function testKilometersToMiles(): void
 	{
 		// int
