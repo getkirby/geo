@@ -3,9 +3,14 @@
 /**
  * Autoloader for all Kirby GEO Classes
  */
+
+use Kirby\Content\Field;
+use Kirby\Geo\Geo;
+use Kirby\Geo\Point;
+
 load([
-	'kirby\\geo\\geo'   => __DIR__ . '/lib/Geo.php',
-	'kirby\\geo\\point' => __DIR__ . '/lib/Point.php'
+	'kirby\\geo\\geo'   => __DIR__ . '/src/Geo.php',
+	'kirby\\geo\\point' => __DIR__ . '/src/Point.php'
 ]);
 
 /**
@@ -38,7 +43,7 @@ Kirby::plugin('getkirby/geo', [
 				$value = $collection->getAttribute($item, $field);
 
 				// skip invalid points
-				if (!is_string($value) && !is_a($value, 'Kirby\\Cms\\Field')) {
+				if (!is_string($value) && !is_a($value, Field::class)) {
 					unset($collection->$key);
 					continue;
 				}
@@ -78,7 +83,7 @@ Kirby::plugin('getkirby/geo', [
 		 * valid Kirby Geo Point
 		 */
 		'distance' => function ($field, $point, $unit = 'km') {
-			if (is_a($point, 'Kirby\\Geo\\Point') === false) {
+			if (is_a($point, Point::class) === false) {
 				throw new Exception('You must pass a valid Geo Point object to measure the distance');
 			}
 
@@ -90,7 +95,7 @@ Kirby::plugin('getkirby/geo', [
 		 * of the distance instead of a long float
 		 */
 		'niceDistance' => function ($field, $point, $unit = 'km') {
-			if (is_a($point, 'Kirby\\Geo\\Point') === false) {
+			if (is_a($point, Point::class) === false) {
 				throw new Exception('You must pass a valid Geo Point object to measure the distance');
 			}
 
