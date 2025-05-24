@@ -9,7 +9,7 @@ ini_set('display_startup_errors', 'on');
 $bootstrapper = dirname(__DIR__, 4) . '/kirby/bootstrap.php';
 
 if (is_file($bootstrapper)) {
-    require_once $bootstrapper;
+	require_once $bootstrapper;
 }
 
 kirby();
