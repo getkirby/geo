@@ -12,7 +12,7 @@ class GeoTest extends TestCase
 		$hamburg  = Geo::point(53.553436, 9.992247);
 		$distance = Geo::distance($mannheim, $hamburg);
 
-		$this->assertSame(464.1569693897881, $distance);
+		$this->assertSame(464.15696938977845, $distance);
 	}
 
 	public function testDistanceInMiles(): void
@@ -21,7 +21,7 @@ class GeoTest extends TestCase
 		$hamburg  = Geo::point(53.553436, 9.992247);
 		$distance = Geo::distance($mannheim, $hamburg, 'mi');
 
-		$this->assertSame(288.41448630481324, $distance);
+		$this->assertSame(288.4144863048072, $distance);
 	}
 
 	public function testKilometersToMiles(): void
@@ -71,7 +71,7 @@ class GeoTest extends TestCase
 
 		$point = Geo::point($lat, $lng);
 
-		$this->assertInstanceOf('Kirby\Geo\Point', $point);
+		$this->assertInstanceOf(Point::class, $point);
 		$this->assertSame($lat, $point->lat());
 		$this->assertSame($lng, $point->lng());
 	}

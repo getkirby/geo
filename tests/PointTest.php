@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class PointTest extends TestCase
 {
-	public function test__construct()
+	public function test__construct(): void
 	{
 		// float values
 		$lat = 49.4883333;
@@ -32,7 +32,7 @@ class PointTest extends TestCase
 		$point = new Point('foo', 'bar');
 	}
 
-	public function testMake()
+	public function testMake(): void
 	{
 		$lat = 49.4883333;
 		$lng = 8.4647222;
