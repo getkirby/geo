@@ -2,6 +2,7 @@
 
 namespace Kirby\Geo;
 
+use Kirby\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class PointTest extends TestCase
@@ -26,7 +27,7 @@ class PointTest extends TestCase
 		$this->assertSame($lng, $point->long());
 
 		// invalid point
-		$this->expectException('Exception');
+		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid Geo Point values');
 
 		$point = new Point('foo', 'bar');

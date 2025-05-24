@@ -2,32 +2,32 @@
 
 namespace Kirby\Geo;
 
-use A;
-
 /**
  * Kirby Geo Class
  *
- * @author Bastian Allgeier <bastian@getkirby.com>
+ * @package   Kirby Geo
+ * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
  * @license MIT
- * @link https://getkirby.com
  */
 class Geo
 {
 	/**
 	 * Calculates the distance between to Kirby Geo Points
 	 *
-	 * @param \Kirby\Geo\Point|string $a
-	 * @param \Kirby\Geo\Point|string $b
 	 * @param null|string $unit ("km", "mi")
-	 * @return float
 	 */
-	public static function distance($a, $b, string $unit = 'km')
-	{
-		if (is_a($a, 'Kirby\\Geo\\Point') === false) {
+	public static function distance(
+		Point|string $a,
+		Point|string $b,
+		string $unit = 'km'
+	): float {
+		if (is_string($a) === true) {
 			$a = static::point($a);
 		}
 
-		if (is_a($b, 'Kirby\\Geo\\Point') === false) {
+		if (is_string($b) === true) {
 			$b = static::point($b);
 		}
 
@@ -46,8 +46,6 @@ class Geo
 
 	/**
 	 * Converts Kilometers to Miles
-	 *
-	 * @param int|float $kilometers
 	 */
 	public static function kilometersToMiles(float $kilometers): float
 	{
@@ -56,8 +54,6 @@ class Geo
 
 	/**
 	 * Converts Miles to Kilometers
-	 *
-	 * @param int|float $miles
 	 */
 	public static function milesToKilometers(float $miles): float
 	{
@@ -68,22 +64,23 @@ class Geo
 	 * Calculates the distance between to Kirby Geo Points
 	 * and returns the result in a a human readable format
 	 *
-	 * @param Kirby\Geo\Point|string $a
-	 * @param Kirby\Geo\Point|string $b
 	 * @param null|string $unit ("km", "mi")
 	 */
-	public static function niceDistance($a, $b, string $unit = 'km'): string
-	{
-		return number_format(static::distance($a, $b, $unit), 2) . ' ' . strtolower($unit);
+	public static function niceDistance(
+		Point|string $a,
+		Point|string $b,
+		string $unit = 'km'
+	): string {
+		$distance = static::distance($a, $b, $unit);
+		return number_format($distance, 2) . ' ' . strtolower($unit);
 	}
 
 	/**
 	 * Creates a new Kirby Geo Point object
 	 *
 	 * @see \Kirby\Geo\Point::make
-	 * @return \Kirby\Geo\Point
 	 */
-	public static function point(...$args)
+	public static function point(...$args): Point
 	{
 		return Point::make(...$args);
 	}

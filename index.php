@@ -4,7 +4,9 @@
  * Autoloader for all Kirby GEO Classes
  */
 
+use Kirby\Cms\Collection;
 use Kirby\Content\Field;
+use Kirby\Exception\InvalidArgumentException;
 use Kirby\Geo\Geo;
 use Kirby\Geo\Point;
 
@@ -26,14 +28,14 @@ Kirby::plugin('getkirby/geo', [
 		/**
 		 * Adds a new radius filter to all collections
 		 */
-		'radius' => function ($collection, $field, $options) {
+		'radius' => function (
+			Collection $collection,
+			Field $field,
+			array $options
+		): Collection {
 			$origin = Geo::point($options['lat'] ?? null, $options['lng'] ?? null);
 			$radius = (int)($options['radius'] ?? null);
 			$unit   = $options['unit'] ?? 'km' === 'km' ? 'km' : 'mi';
-
-			if (!$origin) {
-				throw new Exception('Invalid geo point for radius filter. You must specify valid lat and lng values');
-			}
 
 			if ($radius === 0) {
 				throw new Exception('Invalid radius value for radius filter. You must specify a valid integer value');
@@ -43,14 +45,17 @@ Kirby::plugin('getkirby/geo', [
 				$value = $collection->getAttribute($item, $field);
 
 				// skip invalid points
-				if (!is_string($value) && !is_a($value, Field::class)) {
+				if (
+					is_string($value) === false &&
+					$value instanceof Field === false
+				) {
 					unset($collection->$key);
 					continue;
 				}
 
 				try {
 					$point = Geo::point((string)$value);
-				} catch (Exception $e) {
+				} catch (InvalidArgumentException) {
 					unset($collection->$key);
 					continue;
 				}
@@ -72,7 +77,7 @@ Kirby::plugin('getkirby/geo', [
 		 * which can be used to convert a field with
 		 * comma separated lat and long values to a Kirby Geo Point
 		 */
-		'coordinates' => function ($field) {
+		'coordinates' => function (Field $field): Point {
 			return Geo::point($field->value());
 		},
 
@@ -82,11 +87,11 @@ Kirby::plugin('getkirby/geo', [
 		 * field with comma separated lat and long values and a
 		 * valid Kirby Geo Point
 		 */
-		'distance' => function ($field, $point, $unit = 'km') {
-			if (is_a($point, Point::class) === false) {
-				throw new Exception('You must pass a valid Geo Point object to measure the distance');
-			}
-
+		'distance' => function (
+			Field $field,
+			Point $point,
+			string $unit = 'km'
+		): float {
 			return Geo::distance($field->coordinates(), $point, $unit);
 		},
 
@@ -94,11 +99,11 @@ Kirby::plugin('getkirby/geo', [
 		 * Same as distance, but will return a human readable version
 		 * of the distance instead of a long float
 		 */
-		'niceDistance' => function ($field, $point, $unit = 'km') {
-			if (is_a($point, Point::class) === false) {
-				throw new Exception('You must pass a valid Geo Point object to measure the distance');
-			}
-
+		'niceDistance' => function (
+			Field $field,
+			Point $point,
+			string $unit = 'km'
+		): string {
 			return Geo::niceDistance($field->coordinates(), $point, $unit);
 		},
 	],

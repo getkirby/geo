@@ -2,9 +2,9 @@
 
 namespace Kirby\Geo;
 
-use A;
-use Exception;
-use Str;
+use Kirby\Exception\InvalidArgumentException;
+use Kirby\Toolkit\A;
+use Kirby\Toolkit\Str;
 
 /**
  * Kirby Geo Point Class
@@ -15,27 +15,18 @@ use Str;
  */
 class Point
 {
-	/**
-	 * Latitude
-	 *
-	 * @var float
-	 */
-	protected $lat;
-
-	/**
-	 * Longitude
-	 *
-	 * @var float
-	 */
-	protected $lng;
+	protected float $lat;
+	protected float $lng;
 
 	/**
 	 * Creates a new Point object
 	 */
-	public function __construct(string $lat, string $lng)
-	{
+	public function __construct(
+		string|float $lat,
+		string|float $lng
+	) {
 		if (is_numeric($lat) === false || is_numeric($lng) === false) {
-			throw new Exception('Invalid Geo Point values');
+			throw new InvalidArgumentException('Invalid Geo Point values');
 		}
 
 		$this->lat = (float)$lat;
@@ -44,30 +35,25 @@ class Point
 
 	/**
 	 * Returns the latitude value of the point
-	 *
-	 * @return float
 	 */
-	public function lat()
+	public function lat(): float
 	{
 		return $this->lat;
 	}
 
 	/**
 	 * Returns the longituted value of the point
-	 *
-	 * @return float
 	 */
-	public function lng()
+	public function lng(): float
 	{
 		return $this->lng;
 	}
 
 	/**
 	 * Returns the longituted value of the point
-	 *
-	 * @return float
+	 * @see self::lng()
 	 */
-	public function long()
+	public function long(): float
 	{
 		return $this->lng();
 	}
@@ -80,36 +66,36 @@ class Point
 	 * 2.) static::make("$lat,$lng")
 	 * 3.) static::make([$lat, $lng])
 	 * 4.) static::make(['lat' => $lat, 'lng' => $lng])
-	 *
-	 * @return Kirby\Geo\Point
 	 */
-	public static function make(...$args)
+	public static function make(...$args): static
 	{
 		$count = count($args);
 
-		switch ($count) {
-			case 1:
-				if (is_string($args[0]) === true) {
-					$parts = Str::split($args[0]);
-					if (count($parts) === 2) {
-						return new static($parts[0], $parts[1]);
-					}
-				} elseif (is_array($args[0]) === true) {
-					$array = $args[0];
-
-					if (isset($array['lat'], $array['lng'])) {
-						return new static($array['lat'], $array['lng']);
-					}
-					if (count($array) === 2) {
-						return new static(A::first($array), A::last($array));
-					}
-				}
-				break;
-			case 2:
-				return new static($args[0], $args[1]);
-				break;
+		if ($count === 2) {
+			return new static($args[0], $args[1]);
 		}
 
-		throw new Exception('Invalid Geo Point values');
+		if ($count === 1) {
+			if (is_string($args[0]) === true) {
+				$parts = Str::split($args[0]);
+
+				if (count($parts) === 2) {
+					return new static($parts[0], $parts[1]);
+				}
+			}
+
+			if (is_array($args[0]) === true) {
+				$array = $args[0];
+
+				if (isset($array['lat'], $array['lng'])) {
+					return new static($array['lat'], $array['lng']);
+				}
+				if (count($array) === 2) {
+					return new static(A::first($array), A::last($array));
+				}
+			}
+		}
+
+		throw new InvalidArgumentException('Invalid Geo Point values');
 	}
 }
