@@ -1,6 +1,11 @@
 # Kirby GEO Plugin
 
-This plugin adds basic geo search and conversion functionalities to Kirby
+This plugin adds basic geo search and conversion functionalities to Kirby.
+
+### Supports
+
+- Current releases support Kirby 4 and 5
+- For Kirby 3 support, please use [v1.0.2](https://github.com/getkirby/geo/releases/tag/1.0.2)
 
 ## Geo Class Option
 
@@ -152,6 +157,7 @@ echo $page->location()->niceDistance($hamburg);
 ```
 
 ## What’s Kirby?
+
 - **[getkirby.com](https://getkirby.com)** – Get to know the CMS.
 - **[Try it](https://getkirby.com/try)** – Take a test ride with our online demo. Or download one of our kits to get started.
 - **[Documentation](https://getkirby.com/docs/guide)** – Read the official guide, reference and cookbook recipes.

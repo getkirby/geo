@@ -9,3 +9,6 @@
 /.cache
 /.php_cs.cache
 /.phpunit.result.cache
+/vendor
+.php-cs-fixer.cache
+.phpunit.cache
