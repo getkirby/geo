@@ -4,6 +4,13 @@
 # npm modules
 /node_modules
 
+# Editors
+# (sensitive workspace files)
+# ---------------------------
+*.sublime-workspace
+/.vscode
+/.idea
+
 # Composer files
 
 /.cache

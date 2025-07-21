@@ -30,7 +30,7 @@ Kirby::plugin('getkirby/geo', [
 		 */
 		'radius' => function (
 			Collection $collection,
-			Field $field,
+			string $field,
 			array $options
 		): Collection {
 			$origin = Geo::point($options['lat'] ?? null, $options['lng'] ?? null);
