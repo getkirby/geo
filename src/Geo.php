@@ -33,7 +33,7 @@ class Geo
 
 		$theta = $a->lng() - $b->lng();
 		$dist  = sin(deg2rad($a->lat())) * sin(deg2rad($b->lat())) +  cos(deg2rad($a->lat())) * cos(deg2rad($b->lat())) * cos(deg2rad($theta));
-		$dist = min(1, max(-1, $dist));
+		$dist  = min(1, max(-1, $dist));
 		$dist  = acos($dist);
 		$dist  = rad2deg($dist);
 		$miles = $dist * 60 * 1.1515;
