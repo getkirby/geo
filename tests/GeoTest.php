@@ -14,12 +14,12 @@ class GeoTest extends TestCase
 
 		$this->assertSame(464.15696938977845, $distance);
 	}
-	public function testDistanceDoesNotReturnNaN(): void
+
+	public function testDistanceSameHighPrecisionPoint(): void
 	{
 		$castle = Geo::point(50.706914865043444, -1.549996006816997);
 		$distance = Geo::distance($castle, $castle);
 
-		$this->assertIsFloat($distance);
 		$this->assertSame(0.0, $distance);
 	}
 
